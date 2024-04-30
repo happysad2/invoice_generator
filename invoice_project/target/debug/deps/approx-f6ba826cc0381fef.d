@@ -1,0 +1,11 @@
+/Users/jackperry/Documents/GitHub/invoice_script/invoice_project/target/debug/deps/approx-f6ba826cc0381fef.rmeta: /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/lib.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/abs_diff_eq.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/relative_eq.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/ulps_eq.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/macros.rs
+
+/Users/jackperry/Documents/GitHub/invoice_script/invoice_project/target/debug/deps/libapprox-f6ba826cc0381fef.rlib: /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/lib.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/abs_diff_eq.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/relative_eq.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/ulps_eq.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/macros.rs
+
+/Users/jackperry/Documents/GitHub/invoice_script/invoice_project/target/debug/deps/approx-f6ba826cc0381fef.d: /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/lib.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/abs_diff_eq.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/relative_eq.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/ulps_eq.rs /Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/macros.rs
+
+/Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/lib.rs:
+/Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/abs_diff_eq.rs:
+/Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/relative_eq.rs:
+/Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/ulps_eq.rs:
+/Users/jackperry/.cargo/registry/src/index.crates.io-6f17d22bba15001f/approx-0.3.2/src/macros.rs:

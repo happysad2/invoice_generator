@@ -1,0 +1,23 @@
+from datetime import date
+
+#store inputs from user as variables.
+def key_changes(invoice_no, client_name, client_address, total_cost):
+
+    #extract year from todays date... add to invoice no. as prefix.
+    today_date= date.today().strftime("%B %d, %Y") 
+    year = today_date[-4:]
+
+    invoice_no = 'INV' + year + '-' + input('Invoice no, ')
+    client_name = input('Client name, ')
+    client_address = input('Client address, ')
+    total_cost = input('Total cost, ')
+
+    print(invoice_no)
+    print(client_name)
+    print(client_address)
+    print(total_cost)
+
+    return(invoice_no,client_name,client_address,total_cost)
+
+key_changes('asdf','ajsdfj','jasdfj','asdfjd')
+
