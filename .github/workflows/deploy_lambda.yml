@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.8'  # Match the Python version used by your Lambda
+          python-version: '3.9.0'  # Match the Python version used by your Lambda
 
       - name: Install dependencies
         run: |
@@ -33,5 +33,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'ap-southeast-2'  # Specify your Lambda function's region
         run: |
-          aws lambda update-function-code --function-name your-function-name --zip-file fileb://function.zip --publish
+          aws lambda update-function-code --function-name InvGen --zip-file fileb://function.zip --publish
 
