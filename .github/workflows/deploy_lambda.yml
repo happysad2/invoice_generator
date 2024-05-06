@@ -11,16 +11,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Upgraded to the latest version
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4  # Assuming v4 is available and it's the latest
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          node-version: '20'  # Using Node.js v20
+          python-version: '3.10'  # Ensure this matches the Python version you need
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
-          npm install
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Package Lambda function
         run: |
