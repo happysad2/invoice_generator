@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # This is correctly using v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v3  # Reverting to the latest stable version
         with:
           python-version: '3.10'  # Ensure this matches the Python version you need
 
