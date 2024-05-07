@@ -1,6 +1,9 @@
 name: build-lambda-layer
 
 on:
+  push:
+    branches:
+      - master  # Set this to the branch from which you want to deploy
   workflow_dispatch:
     inputs:
       python_version:
@@ -31,7 +34,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: happysad2/invoice_generator
-          ref: main
+          ref: master
 
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v2  # Assumed update for clarity
