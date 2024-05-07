@@ -1,10 +1,10 @@
-name: build-lambda-layer
+name: Build Lambda Layer
 
 on:
   push:
     branches:
-      - master  # Set this to the branch from which you want to deploy
-  workflow_dispatch:
+      - master  # Triggers on pushes to the master branch
+  workflow_dispatch:  # Allows manual triggering from the GitHub UI
     inputs:
       python_version:
         description: 'Python Version'
@@ -20,6 +20,7 @@ env:
   layer_name: InvGen
   bucket_name: jack-invoice-gen
   bucket_uri: s3://jack-invoice-gen
+  PYTHON_RUNTIME: 'python${{ github.event.inputs.python_version }}'
 
 permissions:
   id-token: write
@@ -28,8 +29,6 @@ permissions:
 jobs:
   build-lambda-layer:
     runs-on: ubuntu-latest
-    env:
-      PYTHON_RUNTIME: 'python${{ format('3.{0}', inputs.python_version % 1 * 10) }}'  # Ensures proper formatting
 
     steps:
       - name: Checkout repo
@@ -38,21 +37,24 @@ jobs:
           repository: happysad2/invoice_generator
           ref: master
 
-      - name: Configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v2
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          role-to-assume: arn:aws:iam::664908640219:role/GitHubActionsDeployRole
-          role-session-name: GitHubActionsBuildLambdaLayer
-          aws-region: ap-southeast-2
+          python-version: ${{ github.event.inputs.python_version }}
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ inputs.python_version }}
-
-      - name: Zip it all up and upload to S3
+      - name: Install dependencies and package
         run: |
           mkdir python
-          pip install -r requirements/layer_${{ inputs.layer_file }}.txt -t python
-          zip --quiet -r ${{ env.layer_name }}_${{ inputs.layer_file }}.zip python
-          aws s3 cp ${{ env.layer_name }}_${{ inputs.layer_file }}.zip ${{ env.bucket_uri }}
-          aws lambda publish-layer-version --layer-name ${{ env.layer_name }}_${{ inputs.layer_file }} --content S3Bucket=${{ env.bucket_name }},S3Key=${{ env.layer_name }}_${{ inputs.layer_file }}.zip --compatible-runtimes ${{ env.PYTHON_RUNTIME }}
+          pip install -r requirements/layer_${{ github.event.inputs.layer_file }}.txt -t python
+          zip --quiet -r ${ENV:LAYER_NAME}_${ENV:LAYER_FILE}.zip python
+
+      - name: Upload to S3
+        run: |
+          aws s3 cp ${ENV:LAYER_NAME}_${ENV:LAYER_FILE}.zip ${{ env.bucket_uri }}/${{ env.layer_name }}_${{ github.event.inputs.layer_file }}.zip
+
+      - name: Publish Layer
+        run: |
+          aws lambda publish-layer-version --layer-name ${{ env.layer_name }}_${{ github.event.inputs.layer_file }} --content S3Bucket=${{ env.bucket_name }},S3Key=${{ env.layer_name }}_${{ github.event.inputs.layer_file }}.zip --compatible-runtimes ${{ env.PYTHON_RUNTIME }}
+
+      - name: Debug Runtime
+        run: echo "Runtime to be used: ${{ env.PYTHON_RUNTIME }}"
