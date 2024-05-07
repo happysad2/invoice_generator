@@ -28,6 +28,8 @@ permissions:
 jobs:
   build-lambda-layer:
     runs-on: ubuntu-latest
+    env:
+      PYTHON_RUNTIME: 'python${{ format('3.{0}', inputs.python_version % 1 * 10) }}'  # Ensures proper formatting
 
     steps:
       - name: Checkout repo
@@ -37,7 +39,7 @@ jobs:
           ref: master
 
       - name: Configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v2  # Assumed update for clarity
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::664908640219:role/GitHubActionsDeployRole
           role-session-name: GitHubActionsBuildLambdaLayer
@@ -53,4 +55,4 @@ jobs:
           pip install -r requirements/layer_${{ inputs.layer_file }}.txt -t python
           zip --quiet -r ${{ env.layer_name }}_${{ inputs.layer_file }}.zip python
           aws s3 cp ${{ env.layer_name }}_${{ inputs.layer_file }}.zip ${{ env.bucket_uri }}
-          aws lambda publish-layer-version --layer-name ${{ env.layer_name }}_${{ inputs.layer_file }} --content S3Bucket=${{ env.bucket_name }},S3Key=${{ env.layer_name }}_${{ inputs.layer_file }}.zip --compatible-runtimes python${{ inputs.python_version }}
+          aws lambda publish-layer-version --layer-name ${{ env.layer_name }}_${{ inputs.layer_file }} --content S3Bucket=${{ env.bucket_name }},S3Key=${{ env.layer_name }}_${{ inputs.layer_file }}.zip --compatible-runtimes ${{ env.PYTHON_RUNTIME }}
