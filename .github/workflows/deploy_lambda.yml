@@ -1,4 +1,4 @@
-name: build-lambda-layer # https://gist.github.com/wyllie/1a2d32a3282f817e1f2bebea95ab4c38
+name: build-lambda-layer
 
 on:
   workflow_dispatch:
@@ -34,7 +34,7 @@ jobs:
           ref: main
 
       - name: Configure aws credentials
-        uses: aws-actions/configure-aws-credentials@master
+        uses: aws-actions/configure-aws-credentials@v2  # Assumed update for clarity
         with:
           role-to-assume: arn:aws:iam::664908640219:role/GitHubActionsDeployRole
           role-session-name: GitHubActionsBuildLambdaLayer
@@ -47,10 +47,7 @@ jobs:
       - name: Zip it all up and upload to S3
         run: |
           mkdir python
-
           pip install -r requirements/layer_${{ inputs.layer_file }}.txt -t python
-
           zip --quiet -r ${{ env.layer_name }}_${{ inputs.layer_file }}.zip python
-
           aws s3 cp ${{ env.layer_name }}_${{ inputs.layer_file }}.zip ${{ env.bucket_uri }}
-          aws lambda publish-layer-version --layer-name ${{ env.layer_name }}_${{ inputs.layer_file }}  --content S3Bucket=${{ env.bucket_name }},S3Key=${{ env.layer_name }}_${{ inputs.layer_file }}.zip --compatible-runtimes python${{ inputs.python_version }}
+          aws lambda publish-layer-version --layer-name ${{ env.layer_name }}_${{ inputs.layer_file }} --content S3Bucket=${{ env.bucket_name }},S3Key=${{ env.layer_name }}_${{ inputs.layer_file }}.zip --compatible-runtimes python${{ inputs.python_version }}
