@@ -90,8 +90,7 @@ y -= line_height  # Move down for the next line
 canvas.drawString(left_margin, y, f"Payment Due By: {due_date}")
 y -= section_spacing  # Additional spacing before the next section
 
-y -= 3 * line_height + section_spacing
-
+y -= 1 * line_height + section_spacing
 # Change customer details here....
 # client_name = client_name
 # client_address = client_address
