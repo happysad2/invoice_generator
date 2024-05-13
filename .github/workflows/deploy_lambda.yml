@@ -1,9 +1,9 @@
 name: Build Lambda Layer
 
 on:
-  push:
-    branches:
-      - master  # Triggers on pushes to the master branch
+  # push:
+  #   branches:
+  #     - master  # Triggers on pushes to the master branch
   workflow_dispatch:
     inputs:
       python_version:
